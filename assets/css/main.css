@@ -210,6 +210,18 @@ h6 {
   }
 }
 
+@media (max-width: 575.98px) {
+  .header {
+    flex-wrap: wrap;
+  }
+
+  .header .btn-getstarted {
+    width: 100%;
+    margin: 0.75rem 0 0;
+    padding: 10px 0;
+  }
+}
+
 .scrolled .header {
   box-shadow: 0px 0 18px rgba(0, 0, 0, 0.1);
 }
