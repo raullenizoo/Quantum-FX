@@ -927,8 +927,14 @@ textarea::placeholder {
 
   .btn-outline-primary:hover {
     background-color: #ff6a00;
+    border-color: #ff6a00;
     color: white;
     transform: translateX(4px);
+  }
+
+  .collections .collection-card .btn-outline-primary:hover,
+  .collections .collection-card .btn-outline-primary:focus {
+    border-color: #ff6a00;
   }
 
   /* Info Section Styles */

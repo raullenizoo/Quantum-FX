@@ -186,4 +186,35 @@
   window.addEventListener('load', navmenuScrollspy);
   document.addEventListener('scroll', navmenuScrollspy);
 
+  /**
+   * Activate shop tab when clicking a collection card (View All).
+   */
+  function initCollectionTabLinks() {
+    document.querySelectorAll('#collections a[href^="#menu-"]').forEach(link => {
+      link.addEventListener('click', function(e) {
+        const targetHash = this.getAttribute('href');
+        const tabBtn = document.querySelector(`#menuTabs button[data-bs-target="${targetHash}"]`);
+        if (!tabBtn) return;
+
+        e.preventDefault();
+
+        // Activate the tab
+        const tabInstance = bootstrap.Tab.getOrCreateInstance(tabBtn);
+        tabInstance.show();
+
+        // Smooth scroll to shop section for better UX
+        const shopSection = document.querySelector('#shop');
+        if (shopSection) {
+          const scrollMarginTop = parseInt(getComputedStyle(shopSection).scrollMarginTop) || 0;
+          window.scrollTo({
+            top: shopSection.offsetTop - scrollMarginTop,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  }
+
+  window.addEventListener('load', initCollectionTabLinks);
+
 })();
