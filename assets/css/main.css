@@ -20,6 +20,15 @@
 
 }
 
+* {
+  cursor: default !important;
+}
+
+a, button {
+  cursor: pointer !important;
+}
+
+
 /* Global Colors - Orange-dominant palette for Quantum FX */
 :root { 
   --background-color: #ffffff;
@@ -87,6 +96,7 @@ h5,
 h6 {
   color: var(--heading-color);
   font-family: var(--default-font);
+  cursor: default;
 }
 
 /* PHP Email Form Messages
@@ -186,6 +196,7 @@ h6 {
   display: grid;
   place-items: center;
   font-size: 15px;
+  cursor: pointer;
 }
 
 .header .btn-getstarted:hover,
@@ -210,15 +221,99 @@ h6 {
   }
 }
 
-@media (max-width: 575.98px) {
+@media (max-width: 989.98px) {
   .header {
     flex-wrap: wrap;
   }
 
+  /* When nav links are hidden (mobile), hide the Shop Now button and show the burger icon */
   .header .btn-getstarted {
-    width: 100%;
-    margin: 0.75rem 0 0;
-    padding: 10px 0;
+    display: none;
+  }
+
+  .mobile-nav-toggle {
+    display: block;
+  }
+}
+
+ul {
+  list-style: none;
+}
+
+/* Show nav links + header button on mid-size screens */
+@media (min-width: 990px) and (max-width: 1199.98px) {
+  .mobile-nav-toggle {
+    display: none;
+  }
+
+  .navmenu {
+    padding: 0;
+  }
+
+  .navmenu ul {
+    display: flex;
+    position: static;
+    inset: auto;
+    background: none;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .navmenu a,
+  .navmenu a:focus {
+    color: var(--nav-color);
+    padding: 18px 15px;
+    font-size: 16px;
+    font-family: var(--nav-font);
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.25s ease, transform 0.25s ease;
+  }
+
+  .navmenu a::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 14px;
+    width: 0;
+    height: 2px;
+    background: var(--accent-color);
+    border-radius: 999px;
+    transition: width 0.25s ease, left 0.25s ease;
+  }
+
+  .navmenu a:hover::after,
+  .navmenu .active::after,
+  .navmenu a:focus::after {
+    width: 60%;
+    left: 20%;
+  }
+
+  .navmenu a:hover,
+  .navmenu .active,
+  .navmenu .active:focus {
+    color: var(--nav-hover-color);
+    transform: translateY(-1px);
+  }
+
+  .navmenu a i,
+  .navmenu a:focus i {
+    font-size: 12px;
+    line-height: 0;
+    margin-left: 5px;
+    transition: transform 0.25s ease, color 0.25s ease;
+  }
+
+  .navmenu a:hover i,
+  .navmenu .active i {
+    transform: rotate(90deg);
+    color: var(--nav-hover-color);
   }
 }
 
@@ -253,12 +348,40 @@ h6 {
     padding: 18px 15px;
     font-size: 16px;
     font-family: var(--nav-font);
-    font-weight: 400;
-    display: flex;
+    font-weight: 500;
+    display: inline-flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     white-space: nowrap;
-    transition: 0.3s;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.25s ease, transform 0.25s ease;
+  }
+
+  .navmenu a::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 14px;
+    width: 0;
+    height: 2px;
+    background: var(--accent-color);
+    border-radius: 999px;
+    transition: width 0.25s ease, left 0.25s ease;
+  }
+
+  .navmenu a:hover::after,
+  .navmenu .active::after,
+  .navmenu a:focus::after {
+    width: 60%;
+    left: 20%;
+  }
+
+  .navmenu a:hover,
+  .navmenu .active,
+  .navmenu .active:focus {
+    color: var(--nav-hover-color);
+    transform: translateY(-1px);
   }
 
   .navmenu a i,
@@ -266,7 +389,13 @@ h6 {
     font-size: 12px;
     line-height: 0;
     margin-left: 5px;
-    transition: 0.3s;
+    transition: transform 0.25s ease, color 0.25s ease;
+  }
+
+  .navmenu a:hover i,
+  .navmenu .active i {
+    transform: rotate(90deg);
+    color: var(--nav-hover-color);
   }
 
   .navmenu li:last-child a {
@@ -337,7 +466,7 @@ h6 {
 }
 
 /* Navmenu - Mobile */
-@media (max-width: 1199px) {
+@media (max-width: 989.98px) {
   .mobile-nav-toggle {
     color: var(--nav-color);
     font-size: 28px;
@@ -353,18 +482,21 @@ h6 {
   }
 
   .navmenu ul {
-    display: none;
     list-style: none;
     position: absolute;
     inset: 60px 20px 20px 20px;
     padding: 10px 0;
     margin: 0;
-    border-radius: 6px;
+    border-radius: 16px;
     background-color: var(--nav-mobile-background-color);
     overflow-y: auto;
-    transition: 0.3s;
+    max-height: 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.25s ease, transform 0.25s ease, max-height 0.25s ease;
     z-index: 9998;
-    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.15);
   }
 
   .navmenu a,
@@ -378,7 +510,14 @@ h6 {
     align-items: center;
     justify-content: space-between;
     white-space: nowrap;
-    transition: 0.3s;
+    border-radius: 999px;
+    transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+  }
+
+  .navmenu a:hover,
+  .navmenu a:focus:hover {
+    background: color-mix(in srgb, var(--accent-color), transparent 85%);
+    transform: translateX(4px);
   }
 
   .navmenu a i,
@@ -459,7 +598,10 @@ h6 {
   }
 
   .mobile-nav-active .navmenu>ul {
-    display: block;
+    max-height: 90vh;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
   }
 }
 
@@ -806,6 +948,11 @@ textarea::placeholder {
   }
 
   /* Collection Card Styles */
+  /* Only actual links should show a pointer cursor. The card layout itself is decorative. */
+  .collections .collection-wrapper a {
+    cursor: pointer;
+  }
+
   .collection-card {
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     border-radius: 12px;
@@ -5912,4 +6059,17 @@ section,
 --------------------------------------------------------------*/
 .starter-section {
   /* Add your styles here */
+}
+
+/* Ensure all interactive elements show pointer cursor */
+.btn-getstarted,
+.btn-shop-now,
+.collection-wrapper a,
+.collection-wrapper a * {
+  cursor: pointer;
+}
+
+/* If an element is styled like a button but isn't actually a link/button, keep default cursor */
+.btn-outline-primary:not(a):not(button):not(input):not([role="button"]) {
+  cursor: default;
 }
